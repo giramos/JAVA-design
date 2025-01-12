@@ -1,5 +1,10 @@
 package videoclub;
 
+/**
+ * EstrategiaConcreta (PeliculaNormal)
+ *
+ */
+
 public class PeliculaNormal implements TipoPelicula {
 
 	@Override
@@ -11,8 +16,8 @@ public class PeliculaNormal implements TipoPelicula {
 	public double getPrecio(Alquiler alquiler) {
 		double precioAlquiler = 0;
 		precioAlquiler += 2;
-        if (alquiler.getDias() > 2)
-            precioAlquiler += (alquiler.getDias() - 2) * 1.5;
+		if (alquiler.getDias() > 2)
+			precioAlquiler += (alquiler.getDias() - 2) * 1.5;
 		return precioAlquiler;
 	}
 

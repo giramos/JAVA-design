@@ -1,5 +1,11 @@
 package videoclub;
 
+/**
+ * Contexto (Pelicula) Metodos : contextInterface() -> int getPuntos(Alquiler
+ * alquiler) AND double getPrecio(Alquiler alquiler)
+ * 
+ *
+ */
 public class Pelicula {
 	private String titulo;
 

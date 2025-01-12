@@ -1,7 +1,10 @@
 package main;
 
 import videoclub.*;
-
+/**
+ * Cliente (Main)
+ *
+ */
 public class Main {
 
     public static void main(String[] args) {
