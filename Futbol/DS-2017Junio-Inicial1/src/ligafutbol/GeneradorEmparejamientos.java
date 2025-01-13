@@ -8,9 +8,18 @@ import java.util.Map;
 // Devuelve una tabla hash en la que cada equipo (clave) tiene asociada una lista de equipos
 // (valor) con los que tiene que jugar
 public class GeneradorEmparejamientos {
-	
-	
-	
+	Validator v;
+	private Validator vali;
+
+
+	public GeneradorEmparejamientos(Validator vaild) {
+		this.v = vaild;
+	}
+
+	public GeneradorEmparejamientos(ValidadorGenero validador) {
+		this.vali = validador;
+	}
+
 	public Map<Equipo, List<Equipo>> empareja(List<Equipo> equipos) {
 		Map<Equipo, List<Equipo>> emparejamientos = new HashMap<Equipo, List<Equipo>>();
 
@@ -25,19 +34,16 @@ public class GeneradorEmparejamientos {
 		// que tiene que jugar 'equipo_N'
 		for (Equipo equipo : equipos) {
 			for (Equipo candidato : equipos) {
-				if (equipo != candidato
-						&& !emparejamientos.get(equipo).contains(candidato)) {
-					
-					
-					if (equipo.isMasculino() == candidato.isMasculino()
-							&& equipo.getEdad() == candidato.getEdad()) {
-						emparejamientos.get(equipo).add(candidato);
-						emparejamientos.get(candidato).add(equipo);
-					}
+				if (equipo != candidato && !emparejamientos.get(equipo).contains(candidato)
+						&& v.algoritmo(equipo, candidato)) {
+
+					emparejamientos.get(equipo).add(candidato);
+					emparejamientos.get(candidato).add(equipo);
 				}
 			}
 		}
 
 		return emparejamientos;
 	}
+
 }

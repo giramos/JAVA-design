@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Main {
 	public static void main(String[] args) {
-		GeneradorEmparejamientos generador = new GeneradorEmparejamientos();
+		GeneradorEmparejamientos generador = new GeneradorEmparejamientos(new ValidadorAny(new ValidadorGenero(), new ValidadorEdad()));
 		List<Equipo> equipos = creaEquiposDePrueba();
 
 		Map<Equipo, List<Equipo>> emparejamientos = generador.empareja(equipos);

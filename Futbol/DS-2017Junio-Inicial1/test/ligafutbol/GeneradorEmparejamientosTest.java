@@ -18,7 +18,7 @@ public class GeneradorEmparejamientosTest {
 
 	@Before
 	public void setUp() {
-		generador = new GeneradorEmparejamientos();
+		generador = new GeneradorEmparejamientos(new ValidadorAny(new ValidadorEdad(), new ValidadorGenero()));
 		equipos = new ArrayList<Equipo>();
 
 		callealteros = new Equipo("Callealteros", "Cantabria", true, 10);
