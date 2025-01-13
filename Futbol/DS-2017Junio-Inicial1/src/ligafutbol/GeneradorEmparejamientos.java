@@ -9,16 +9,12 @@ import java.util.Map;
 // (valor) con los que tiene que jugar
 public class GeneradorEmparejamientos {
 	Validator v;
-	private Validator vali;
 
 
 	public GeneradorEmparejamientos(Validator vaild) {
 		this.v = vaild;
 	}
 
-	public GeneradorEmparejamientos(ValidadorGenero validador) {
-		this.vali = validador;
-	}
 
 	public Map<Equipo, List<Equipo>> empareja(List<Equipo> equipos) {
 		Map<Equipo, List<Equipo>> emparejamientos = new HashMap<Equipo, List<Equipo>>();
