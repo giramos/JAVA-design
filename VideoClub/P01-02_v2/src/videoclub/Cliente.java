@@ -19,13 +19,13 @@ public class Cliente {
     }
 
     public void imprimeInforme() {
-        double totalPrecio = 0;
-        int totalPuntos = 0;
+        
         System.out.println("Informe de los alquileres de: " + getNombre());
 
-        for (Alquiler alquiler : alquileres) {
-
-            // 1) Calcula el importe de cada alquiler
+        alquileres.forEach(alquiler -> {
+        	double totalPrecio = 0;
+            int totalPuntos = 0;
+        	 // 1) Calcula el importe de cada alquiler
             double precioAlquiler = alquiler.getPelicula().getPrecio(alquiler);
 
             // 2) Cada alquiler da 1 punto. Punto extra para novedades alquiladas 2 o más días
@@ -38,9 +38,10 @@ public class Cliente {
             // 4) Muestra el importe de este alquiler
             System.out.println("\t- " + alquiler.getPelicula().getTitulo() + "\t" + precioAlquiler + "€");
 
-        }
+            System.out.println("La deuda es de " + totalPrecio + "€.\n");
+            System.out.println("Ha obtenido " + totalPuntos + " puntos en tu tarjeta.");
+        });
 
-        System.out.println("La deuda es de " + totalPrecio + "€.\n");
-        System.out.println("Ha obtenido " + totalPuntos + " puntos en tu tarjeta.");
+      
     }
 }
