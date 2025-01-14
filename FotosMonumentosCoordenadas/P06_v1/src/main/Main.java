@@ -1,5 +1,8 @@
 package main;
 
+import adapter.AdapterPhoto;
+import adapter.AdapterRestaurant;
+import adapter.AdapterMonument;
 import database.Database;
 import google.maps.*;
 import model.*;
@@ -15,15 +18,15 @@ public class Main {
 		System.out.println("\n 1. Metiendo marcadores en el mapa");
 
 		for (Monument monument : db.selectMonuments()) {
-			// map.add(monument);
+			 map.add(new AdapterMonument(monument));
 		}
 
 		for (Photo photo : db.selectPhotos()) {
-			// map.add(photo);
+			 map.add(new AdapterPhoto(photo));
 		}
 
 		for (Restaurant restaurant : db.selectRestaurants()) {
-			// map.add(restaurant);
+			 map.add(new AdapterRestaurant(restaurant));
 		}
 
 		// 2. En el mapa se dibujan los marcadores para los elementos añadidos al mapa
