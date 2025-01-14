@@ -1,5 +1,6 @@
 package main;
 
+import adapters.AdapterFoto;
 import database.Database;
 import google.maps.*;
 import model.*;
@@ -19,7 +20,7 @@ public class Main {
 		}
 
 		for (Photo photo : db.selectPhotos()) {
-			// map.add(photo);
+			 map.add(new AdapterFoto("Raúl", "El Coliseo de noche", new Coordinates(20, 20)));
 		}
 
 		for (Restaurant restaurant : db.selectRestaurants()) {

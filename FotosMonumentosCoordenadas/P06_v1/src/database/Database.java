@@ -26,7 +26,8 @@ public class Database {
 	public Collection<Restaurant> selectRestaurants() {
 		List<Restaurant> restaurantes = new ArrayList<>();
 		restaurantes.add(new Restaurant("Il Gladiatore", "Via dei Trionfo 2. Roma", "555 123 456"));
-		restaurantes.add(new Restaurant("Mario", "Via della Dataria. Roma", "555 123 457"));
+		restaurantes.add(new Restaurant("Pane e Salame",
+				"Santa Maria in Via 19, Roma, Italia", "+39 06 679 1352"));
 		return restaurantes;
 	}
 }
