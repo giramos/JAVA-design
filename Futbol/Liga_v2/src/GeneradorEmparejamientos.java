@@ -1,13 +1,14 @@
 
 import java.util.*;
 
-import validator.*;
+import validator.Validador;
+import validator.ValidadorAll;
+import validator.ValidadorEdad;
+import validator.ValidadorGenero;
 
 //Devuelve una tabla hash en la que cada equipo (clave) tiene asociada
 //una lista de equipos (valor) con los que tiene que jugar
 public class GeneradorEmparejamientos {
-	Validador valid;
-
 	public Map<Equipo, List<Equipo>> empareja(List<Equipo> equipos) {
 		Map<Equipo, List<Equipo>> emparejamientos = new HashMap<Equipo, List<Equipo>>();
 
@@ -21,9 +22,11 @@ public class GeneradorEmparejamientos {
 		// los que tiene que jugar 'equipo_N'
 		for (Equipo equipo : equipos) {
 			for (Equipo candidato : equipos) {
-				if (añadeValidadores(emparejamientos).validar(equipo, candidato)) {
-					emparejamientos.get(equipo).add(candidato);
-					emparejamientos.get(candidato).add(equipo);
+				if (equipo != candidato && !emparejamientos.get(equipo).contains(candidato)) {
+					if (validacion(equipo, candidato)) {
+						emparejamientos.get(equipo).add(candidato);
+						emparejamientos.get(candidato).add(equipo);
+					}
 				}
 			}
 		}
@@ -31,15 +34,10 @@ public class GeneradorEmparejamientos {
 		return emparejamientos;
 	}
 
-	private Validador añadeValidadores(Map<Equipo, List<Equipo>> emparejamientos) {
-		ValidadorAll all = new ValidadorAll();
-		all.añadir(new ContieneEquipo(emparejamientos));
-		all.añadir(new MismoEquipo());
-		all.añadir(new MismaEdad());
-		all.añadir(new EsMasculino());
-		return all;
+	private boolean validacion(Equipo equipo, Equipo candidato) {
+		v = new ValidadorAll(new ValidadorEdad(), new ValidadorGenero());
+		return v.validar(equipo, candidato);
 	}
 
-	
-
+	Validador v;
 }
