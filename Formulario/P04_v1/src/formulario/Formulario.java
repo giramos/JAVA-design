@@ -10,15 +10,16 @@ public class Formulario {
 	public void PideDatos() {
 		for (Campo campo : campos) {
 			campo.pideDato();
-			System.out.println(campo.getDato());
+			System.out.println(campo.getTexto());
 		}
 	}
 
 	public void escribeFormulario () {
 		System.out.println("\nFORM:");
 		for (Campo f : campos)
-			System.out.println(f.getEtiqueta() + ": " +f.getDato());
+			System.out.println(f.getEtiqueta() + ": " +f.getTexto());
 	}
 	
 	private List<Campo> campos = new ArrayList<Campo>();
+
 }
