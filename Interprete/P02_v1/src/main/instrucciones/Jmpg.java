@@ -17,7 +17,7 @@ public class Jmpg extends AbstractInstruccion {
 		if (a > b)
 			new Jmp(inst);
 		else
-			state.ip++;
+			state.setIP(+1);
 
 	}
 

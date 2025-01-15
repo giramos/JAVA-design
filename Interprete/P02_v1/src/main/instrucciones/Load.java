@@ -7,7 +7,7 @@ public class Load extends AbstractInstruccion {
 	@Override
 	protected void doExecute(State statestate) {
 		int direccion = statestate.pop();
-		statestate.push(statestate.memoria[direccion]);
+		statestate.push(statestate.read(direccion));
 	}
 
 }

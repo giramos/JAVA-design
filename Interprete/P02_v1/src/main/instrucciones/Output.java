@@ -9,7 +9,4 @@ public class Output extends AbstractInstruccion {
 		System.out.println(state.pop());
 	}
 
-	
-	
-
 }

@@ -8,7 +8,7 @@ public abstract class AbstractInstruccion implements Instruccion {
 	@Override
 	public void execute(State state) {
 		doExecute(state);
-		state.ip ++;
+		state.setIP(+1);;
 	}
 
 	protected abstract void doExecute(State state);

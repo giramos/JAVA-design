@@ -8,7 +8,7 @@ public class Store extends AbstractInstruccion {
 	protected void doExecute(State state) {
 		int valor = state.pop();
 		int direccion = state.pop();
-		state.memoria[direccion] = valor;
+		state.write(direccion, valor);
 	}
 
 }

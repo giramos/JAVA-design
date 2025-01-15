@@ -13,7 +13,7 @@ public class Jmp implements Instruccion {
 
 	@Override
 	public void execute(State state) {
-		state.ip = Integer.parseInt(ins[1]);
+		state.setIP(Integer.parseInt(ins[1]));
 
 	}
 
