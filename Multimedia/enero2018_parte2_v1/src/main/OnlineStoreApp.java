@@ -18,19 +18,22 @@ public class OnlineStoreApp {
 		List<CompactDisc> discs = server.downloadCompactDiscs();
 
 		// 1. Mostrando los datos del servidor
-		Table table = new Table();
-		for (CompactDisc disc : discs) {
-			table.insertRow(disc);
+		Table tablec = new TableCD();
+		for (CompactDisc cd : discs) {
+			tablec.insertRowCD(cd);
 		}
-		table.drawTable();
+		tablec.drawTable();
 
 		/*
-		 * Se muestra por pantalla la siguiente tabla:
-		 * 
-		 * +---------------+----------------+ | Título | Artista |
-		 * +---------------+----------------+ | Despacito | Luis Fonsi | | Dragon's Kiss
-		 * | Marty Friedman | +---------------+----------------+
-		 */
+	  	Se muestra por pantalla la siguiente tabla:
+	 
+		+---------------+----------------+
+		| Título        | Artista        |
+		+---------------+----------------+
+		| Despacito     | Luis Fonsi     |
+		| Dragon's Kiss | Marty Friedman |
+		+---------------+----------------+
+	 */
 
 		// 2. Modificamos los datos
 		System.out.println("Modificando los datos...");
@@ -38,20 +41,22 @@ public class OnlineStoreApp {
 		discs.get(0).setTitle("For Whom the Bells Tolls");
 
 		// 3. Presentamos los nuevos datos
-		table = new Table();
-		for (CompactDisc disco : discs) {
-			table.insertRow(disco);
+		 tablec = new TableCD();
+		for (CompactDisc cd : discs) {
+			tablec.insertRowCD(cd);
 		}
-		table.drawTable();
+		tablec.drawTable();
 
 		/*
-		 * Tras la modificación, ésta es la nueva ventana que se muestra:
-		 * 
-		 * +--------------------------+----------------+ | Título | Artista |
-		 * +--------------------------+----------------+ | For Whom the Bells Tolls |
-		 * Metallica | | Dragon's Kiss | Marty Friedman |
-		 * +--------------------------+----------------+
-		 */
+	  	Tras la modificación, ésta es la nueva ventana que se muestra:
+	 
+		+--------------------------+----------------+
+		| Título                   | Artista        |
+		+--------------------------+----------------+
+		| For Whom the Bells Tolls | Metallica      |
+		| Dragon's Kiss            | Marty Friedman |
+		+--------------------------+----------------+
+	 */
 
 		// 4. Se suben al servidor
 		server.uploadCompactDiscs(discs);

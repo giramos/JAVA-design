@@ -34,11 +34,19 @@ public class AppVersion2 {
 				// table = new Table...;
 				// Insertar móviles
 				// table.drawTable();
+		
+		// 1. Mostrando los datos del servidor
+		Table tablem = new TableMobile();
+		for (Mobile movil : mobiles) {
+			tablem.insertRowMobile(movil);
+		}
+		tablem.drawTable();
 
 				// ---------------------------------------------------------------------------------
 				// B) Mostrar los discos en una tabla (que ponga "Título", "Artista" y 
 				//    "Género" en la cabecera)
 				
+
 				/*
 					+---------------+----------------+--------+
 					| Título        | Artista        | Género | 
@@ -51,6 +59,11 @@ public class AppVersion2 {
 				// table = new Table...;
 				// Insertar discos
 				// table.drawTable();
+		Table tablec = new TableCD();
+		for (CompactDisc cd : discs) {
+			tablec.insertRowCD(cd);
+		}
+		tablec.drawTable();
 
 				// ---------------------------------------------------------------------------------
 				// C) Mostrar los libros en una tabla (que ponga "Título", "Autor",
@@ -69,6 +82,11 @@ public class AppVersion2 {
 				// Insertar libros
 				// table.drawTable();
 
+		Table tableb = new TableBook();
+		for (Book b : books) {
+			tableb.insertRowBook(b);
+		}
+		tableb.drawTable();
 				// ---------------------------------------------------------------------------------
 				// D) Mostrar los discos, móviles y libros en una tabla de 3 columnas 
 				//    (que ponga "Título", "Propietario" e "Información" en la cabecera)
@@ -93,6 +111,18 @@ public class AppVersion2 {
 				// Insertar móviles, discos y libros
 				// table.drawTable();
 
+		Table tableModelo = new TableModelo();
+		for (Mobile movil : mobiles) {
+			tableModelo.insertRowMobile(movil);
+		}
+		for (CompactDisc cd : discs) {
+			tableModelo.insertRowCD(cd);
+		}
+		for (Book b : books) {
+			tableModelo.insertRowBook(b);
+		}
+		tableModelo.drawTable();
+		
 		server.uploadMobiles(mobiles);
 		server.uploadCompactDiscs(discs);
 		server.uploadBooks(books);
