@@ -1,92 +1,60 @@
 package main;
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import main.instrucciones.Add;
+import main.instrucciones.Input;
+import main.instrucciones.Jmp;
+import main.instrucciones.Jmpg;
+import main.instrucciones.Load;
+import main.instrucciones.Mul;
+import main.instrucciones.Output;
+import main.instrucciones.Push;
+import main.instrucciones.Store;
+import main.instrucciones.Sub;
 
 public class Main {
 
-	private static List<String[]> instrucciones = new ArrayList<String[]>();
-	private static int ip = 0;
-
-	private static int[] memoria = new int[1024];
-
-	private static int[] pila = new int[32];
-	private static int sp = 0;
-
-	private static Scanner console = new Scanner(System.in);
-
+	static List<String[]> instrucciones = new ArrayList<String[]>();
+	static State state = new State();
+	
 	public static void main(String[] args) throws Exception {
-		BufferedReader fichero = new BufferedReader(new FileReader("programa.txt"));
-
-		String linea;
-		while ((linea = fichero.readLine()) != null)
-			cargaInstruccion(linea);
-		fichero.close();
-
+		Loading.cargar();
 		ejecutaPrograma();
 	}
 
-	private static void cargaInstruccion(String linea) {
-		if (linea.trim().length() == 0)
-			return;
-
-		String[] palabras = linea.split(" ");
-		instrucciones.add(palabras);
-	}
-
-	private static void push(int valor) {
-		pila[sp] = valor;
-		sp++;
-	}
-
-	private static int pop() {
-		sp--;
-		return pila[sp];
-	}
-
 	private static void ejecutaPrograma() {
-		while (ip < instrucciones.size()) {
-			String[] instruccion = instrucciones.get(ip);
+	    while (state.getIp() < instrucciones.size()) {
+	        String[] instruccion = instrucciones.get(state.getIp());
+	        Instruccion instruccionObj = null;
 
-			if (instruccion[0].equals("push")) {
-				push(Integer.parseInt(instruccion[1]));
-				ip++;
-			} else if (instruccion[0].equals("add")) {
-				push(pop() + pop());
-				ip++;
-			} else if (instruccion[0].equals("sub")) {
-				int b = pop();
-				int a = pop();
-				push(a - b);
-				ip++;
-			} else if (instruccion[0].equals("mul")) {
-				push(pop() * pop());
-				ip++;
-			} else if (instruccion[0].equals("jmp")) {
-				ip = Integer.parseInt(instruccion[1]);
-			} else if (instruccion[0].equals("jmpg")) {
-				int b = pop();
-				int a = pop();
-				if (a > b)
-					ip = Integer.parseInt(instruccion[1]);
-				else
-					ip++;
-			} else if (instruccion[0].equals("load")) {
-				int direccion = pop();
-				push(memoria[direccion]);
-				ip++;
-			} else if (instruccion[0].equals("store")) {
-				int valor = pop();
-				int direccion = pop();
-				memoria[direccion] = valor;
-				ip++;
-			} else if (instruccion[0].equals("input")) {
-				System.out.println("Escriba un entero:");
-				push(console.nextInt());
-				ip++;
-			} else if (instruccion[0].equals("output")) {
-				System.out.println(pop());
-				ip++;
-			}
-		}
+	        if (instruccion[0].equals("push")) {
+	            instruccionObj = new Push(instruccion);
+	        } else if (instruccion[0].equals("add")) {
+	            instruccionObj = new Add();
+	        } else if (instruccion[0].equals("sub")) {
+	            instruccionObj = new Sub();
+	        } else if (instruccion[0].equals("mul")) {
+	            instruccionObj = new Mul();
+	        } else if (instruccion[0].equals("jmp")) {
+	            instruccionObj = new Jmp(instruccion);
+	        } else if (instruccion[0].equals("jmpg")) {
+	            instruccionObj = new Jmpg(instruccion);
+	        } else if (instruccion[0].equals("load")) {
+	            instruccionObj = new Load();
+	        } else if (instruccion[0].equals("store")) {
+	            instruccionObj = new Store();
+	        } else if (instruccion[0].equals("input")) {
+	            instruccionObj = new Input();
+	        } else if (instruccion[0].equals("output")) {
+	            instruccionObj = new Output();
+	        }
+
+	        if (instruccionObj != null) {
+	            instruccionObj.execute(state);
+	        }
+	    }
 	}
+
+
 }
