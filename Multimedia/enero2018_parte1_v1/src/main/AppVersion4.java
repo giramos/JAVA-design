@@ -3,7 +3,12 @@ package main;
 import java.util.*;
 
 import model.*;
+import multimedia.MultimediaBook;
+import multimedia.MultimediaCD;
+import multimedia.MultimediaMobile;
+import multimedia.MultimediaMobile_v1;
 import server.*;
+import view.Table;
 
 public class AppVersion4 {
 	public static void main(String[] args) {
@@ -19,9 +24,15 @@ public class AppVersion4 {
 		List<Mobile> mobiles = server.downloadMobiles();
 
 		// Parte 1
-				// -------
-				// Mostrar sólo los móviles en una tabla (que ponga "Marca" y "Modelo" en la cabecera)
-				
+		// -------
+		// Mostrar sólo los móviles en una tabla (que ponga "Marca" y "Modelo" en la
+		// cabecera)
+		// 1. Mostrando los datos del servidor
+		Table table = new Table();
+		for (Mobile movil : mobiles) {
+			table.insertRow(new MultimediaMobile(movil));
+		}
+		table.drawTable("Marca", "Modelo");
 				/*
 					+---------+-----------+
 					| Marca   | Modelo    |
@@ -38,7 +49,17 @@ public class AppVersion4 {
 				//
 				// Nótese que en esta ocasión, en los móviles, el modelo debe quedar en la
 				// columna 1 (nombre) y la marca en la columna 2 (propietario).
-				
+		table = new Table();
+		for (CompactDisc cd : discs) {
+			table.insertRow(new MultimediaCD(cd));
+		}
+		for (Book book : books) {
+			table.insertRow(new MultimediaBook(book));
+		}
+		for (Mobile movil : mobiles) {
+			table.insertRow(new MultimediaMobile_v1(movil));
+		}
+		table.drawTable("Nombre", "Propietario");
 				/*
 					+--------------------+----------------+
 					| Nombre             | Propietario    |

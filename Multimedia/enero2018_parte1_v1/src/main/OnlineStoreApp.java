@@ -3,6 +3,7 @@ package main;
 import java.util.*;
 
 import model.*;
+import multimedia.MultimediaCD;
 import server.*;
 import view.Table;
 
@@ -20,9 +21,9 @@ public class OnlineStoreApp {
 		// 1. Mostrando los datos del servidor
 		Table table = new Table();
 		for (CompactDisc disc : discs) {
-			table.insertRow(disc);
+			table.insertRow(new MultimediaCD(disc));
 		}
-		table.drawTable();
+		table.drawTable("Título", "Artista");
 
 		/*
 	  	Se muestra por pantalla la siguiente tabla:
@@ -43,9 +44,9 @@ public class OnlineStoreApp {
 		// 3. Presentamos los nuevos datos
 		table = new Table();
 		for (CompactDisc disco : discs) {
-			table.insertRow(disco);
+			table.insertRow(new MultimediaCD(disco));
 		}
-		table.drawTable();
+		table.drawTable("Título", "Artista");
 
 		/*
 	  	Tras la modificación, ésta es la nueva ventana que se muestra:

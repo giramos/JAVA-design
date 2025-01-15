@@ -3,7 +3,9 @@ package main;
 import java.util.List;
 
 import model.Book;
+import multimedia.MultimediaBook;
 import server.Server;
+import view.Table;
 
 public class AppVersion2 {
 	public static void main(String[] args) {
@@ -18,6 +20,12 @@ public class AppVersion2 {
 
 		// Mostrar sólo los libros en una tabla (que ponga "Título" y "Autor" en la cabecera)
 		
+		// 1. Mostrando los datos del servidor
+		Table table = new Table();
+		for (Book book : books) {
+			table.insertRow(new MultimediaBook(book));
+		}
+		table.drawTable("Titulo", "Autor");
 
 				/*		
 					+--------------------+-------------+
@@ -30,6 +38,6 @@ public class AppVersion2 {
 				
 
 
-				server.uploadBooks(books);
+		server.uploadBooks(books);
 	}
 }

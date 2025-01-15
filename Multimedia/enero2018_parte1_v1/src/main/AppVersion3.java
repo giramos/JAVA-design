@@ -3,7 +3,10 @@ package main;
 import java.util.*;
 
 import model.*;
+import multimedia.MultimediaBook;
+import multimedia.MultimediaCD;
 import server.*;
+import view.Table;
 
 public class AppVersion3 {
 	public static void main(String[] args) {
@@ -18,8 +21,16 @@ public class AppVersion3 {
 		List<Book> books = server.downloadBooks();
 
 		// Mostrar en una misma tabla los discos y los libros
-				// (que ponga "Título" y "Autor" en la cabecera)
-				
+		// (que ponga "Título" y "Autor" en la cabecera)
+		// 1. Mostrando los datos del servidor
+		Table table = new Table();
+		for (CompactDisc disco : discs) {
+			table.insertRow(new MultimediaCD(disco));
+		}
+		for (Book book : books) {
+			table.insertRow(new MultimediaBook(book));
+		}
+		table.drawTable("Titulo", "Autor");	
 				/*
 					+--------------------+----------------+
 					| Título             | Autor          |

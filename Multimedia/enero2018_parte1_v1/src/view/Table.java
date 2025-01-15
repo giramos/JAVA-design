@@ -1,23 +1,24 @@
 package view;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import model.*;
+import multimedia.Multimedia;
 
 public class Table {
 	// -- Métodos públicos
 	// -------------------------------------------------------------
 
-	public void insertRow(CompactDisc cd) {
-		rows.add(cd);
+	public void insertRow(Multimedia m) {
+		multimedia.add(m);
 	}
 
-	public void drawTable() {
+	public void drawTable(String string1, String string2) {
 		computeRowWidths();
 
-		printHeader();
-		for (CompactDisc cd : rows)
-			printRow(cd.getTitle(), cd.getArtist());
+		printHeader(string1, string2);
+		for (Multimedia m : multimedia)
+			printRow(m.getString1(), m.getString2());
 		printSeparator();
 		System.out.println();
 	}
@@ -26,35 +27,35 @@ public class Table {
 	// -------------------------------------------------------------
 
 	private void computeRowWidths() {
-		longestTitle = longestArtist = 0;
-		for (CompactDisc disco : rows) {
-			if (disco.getTitle().length() > longestTitle)
-				longestTitle = disco.getTitle().length();
+		longestStr1 = longestStr2 = 0;
+		for (Multimedia m : multimedia) {
+			if (m.getString1().length() > longestStr1)
+				longestStr1 = m.getString1().length();
 
-			if (disco.getArtist().length() > longestArtist)
-				longestArtist = disco.getArtist().length();
+			if (m.getString2().length() > longestStr2)
+				longestStr2 = m.getString2().length();
 		}
 	}
 
-	private void printHeader() {
+	private void printHeader(String string1, String string2) {
 		printSeparator();
-		printRow("Título", "Artista");
+		printRow(string1, string2);
 		printSeparator();
 	}
 
-	private void printRow(String title, String artist) {
+	private void printRow(String str1, String str2) {
 		System.out.print("| ");
-		System.out.print(fillWithBlanks(title, longestTitle));
+		System.out.print(fillWithBlanks(str1, longestStr1));
 		System.out.print(" | ");
-		System.out.print(fillWithBlanks(artist, longestArtist));
+		System.out.print(fillWithBlanks(str2, longestStr2));
 		System.out.println(" |");
 	}
 
 	private void printSeparator() {
 		System.out.print("+");
-		System.out.print(createDashedLine(longestTitle + 2));
+		System.out.print(createDashedLine(longestStr1 + 2));
 		System.out.print("+");
-		System.out.print(createDashedLine(longestArtist + 2));
+		System.out.print(createDashedLine(longestStr2 + 2));
 		System.out.println("+");
 	}
 
@@ -77,6 +78,7 @@ public class Table {
 		return String.format("%0" + ancho + "d", 0).replace('0', '-');
 	}
 
-	private List<CompactDisc> rows = new ArrayList<CompactDisc>();
-	private int longestTitle = 0, longestArtist = 0;
+	private List<Multimedia> multimedia = new ArrayList<>();
+//	private List<CompactDisc> rows = new ArrayList<CompactDisc>();
+	private int longestStr1 = 0, longestStr2 = 0;
 }
