@@ -21,16 +21,12 @@ public class OrdenacionMedia implements Ordenacion {
 					intercambiar = juegoA.getMedia() < juegoB.getMedia();
 				}
 
-
 				if (intercambiar) {
 					Juego temp = juegoA;
 					juegos.set(j, juegoB);
 					juegos.set(j + 1, temp);
 				}
-
 			}
-
 		}
-		
 	}
 }
