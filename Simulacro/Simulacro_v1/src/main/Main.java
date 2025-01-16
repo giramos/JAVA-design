@@ -1,14 +1,17 @@
 package main;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.regex.*;
 
 public class Main {
-	
+	static Editor editor = new Editor();
+	static ActionManager am = new ActionManager(editor);
+
 	public static void main(String[] args) {
 
-		StringBuilder text = new StringBuilder("");
+		
 
 		drawLogo();
 		showHelp();
@@ -34,26 +37,14 @@ public class Main {
 			// No se comprueba que el número de parámetros sea correcto
 
 			if (option.equals("abrir")) {
-				try {
-					String filename = params[0];
-					text = new StringBuilder(readFile(filename));
-				} catch (IOException e) {
-					System.out.println("No se pudo leer el fichero");
-				}
+				editor.setTexto(editor.abrir(editor.getTexto(), params));
+//				am.execute(new CommandAbrir(text, params));
 			} else if (option.equals("insertar")) {
-				for (String word : params) {
-					text.append(word + " ");
-				}
+				editor.insertar(editor.getTexto(), params);
 			} else if (option.equals("borrar")) {
-				int indexOfLastWord = text.toString().trim().lastIndexOf(" ");
-				if (indexOfLastWord == -1)
-					text = new StringBuilder("");
-				else
-					text.setLength(indexOfLastWord + 1);
+				editor.borra(editor.getTexto());
 			} else if (option.equals("reemplazar")) {
-				String find = params[0];
-				String replace = params[1];
-				text = new StringBuilder(text.toString().replaceAll(Pattern.quote(find), replace));
+				editor.reemplazar(editor.getTexto(), params);
 			} else if (option.equals("grabar")) {
 				// To be done
 			} else if (option.equals("parar")) {
@@ -66,20 +57,9 @@ public class Main {
 				System.out.println("Opción incorrecta");
 			}
 
-			System.out.println(text);
-			
-		} while (true);
-	}
+			System.out.println(editor.getTexto());
 
-	private static String readFile(String filename) throws IOException {
-		BufferedReader input = new BufferedReader(new FileReader(filename));
-		String line;
-		StringBuilder result = new StringBuilder();
-		while ((line = input.readLine()) != null) {
-			result.append(line);
-		}
-		input.close();
-		return result.toString();
+		} while (true);
 	}
 
 	private static String askUser() {
@@ -105,8 +85,8 @@ public class Main {
 	private static final String LOGO = """
 			███╗   ███╗ █████╗  ██████╗████████╗███████╗██╗  ██╗
 			████╗ ████║██╔══██╗██╔════╝╚══██╔══╝██╔════╝╚██╗██╔╝
-			██╔████╔██║███████║██║        ██║   █████╗   ╚███╔╝ 
-			██║╚██╔╝██║██╔══██║██║        ██║   ██╔══╝   ██╔██╗ 
+			██╔████╔██║███████║██║        ██║   █████╗   ╚███╔╝
+			██║╚██╔╝██║██╔══██║██║        ██║   ██╔══╝   ██╔██╗
 			██║ ╚═╝ ██║██║  ██║╚██████╗   ██║   ███████╗██╔╝ ██╗
 			╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
 			""";
